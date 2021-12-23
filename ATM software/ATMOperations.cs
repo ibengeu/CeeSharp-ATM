@@ -3,7 +3,7 @@
 
 namespace ATM_software
 {
-    class ATM
+    class ATMOperations
     {
         int pin = 1234;
         double AccountBalance;
@@ -42,6 +42,7 @@ namespace ATM_software
         {
             if (pin == pinCode)
             {
+
                 return true;
             }
             else
@@ -50,6 +51,7 @@ namespace ATM_software
             }
         }
 
+      
         public void WithdrawFunds()
         {
             Console.Clear();
@@ -76,7 +78,7 @@ namespace ATM_software
             if (IsVerified)
             {
 
-                Console.WriteLine("How much to withdraw");
+                Console.WriteLine("How much would you like to withdraw?");
                 string amtInput = Console.ReadLine();
                 int AmtToWithDraw;
                 Int32.TryParse(amtInput, out AmtToWithDraw);
@@ -105,12 +107,16 @@ namespace ATM_software
         public void AddFunds()
         {
 
-            Console.WriteLine("How much for boys?");
-
+            Console.WriteLine("How much would you like to Deposit?");
             Int32.TryParse(Console.ReadLine(), out int amt);
 
             AccountBalance += amt;
             Console.WriteLine($"You Added {amt}, your new Account balance is {AccountBalance}");
+
+            DBOperations transaction = new DBOperations();
+            transaction.WriteTransactionsToFile($"Amount Added - {amt}"); 
+
+            transaction.ReadTransactionsFromFile();
         }
 
        

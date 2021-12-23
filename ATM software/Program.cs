@@ -5,10 +5,8 @@ namespace ATM_software
     {
         static void Main(string[] args)
         {
-
-            ATM Gtb = new ATM();
+            ATMOperations Gtb = new ATMOperations();
             Gtb.BeginTransaction();
-
         }
     }
 
