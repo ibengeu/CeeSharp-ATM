@@ -1,0 +1,7 @@
+C:\Users\Ibenge\source\repos\ATM software\ATM software\bin\Debug\ATM software.exe.config
+C:\Users\Ibenge\source\repos\ATM software\ATM software\bin\Debug\ATM software.exe
+C:\Users\Ibenge\source\repos\ATM software\ATM software\bin\Debug\ATM software.pdb
+C:\Users\Ibenge\source\repos\ATM software\ATM software\obj\Debug\ATM software.csproj.AssemblyReference.cache
+C:\Users\Ibenge\source\repos\ATM software\ATM software\obj\Debug\ATM software.csproj.CoreCompileInputs.cache
+C:\Users\Ibenge\source\repos\ATM software\ATM software\obj\Debug\ATM software.exe
+C:\Users\Ibenge\source\repos\ATM software\ATM software\obj\Debug\ATM software.pdb
