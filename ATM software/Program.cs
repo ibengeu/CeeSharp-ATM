@@ -10,5 +10,5 @@ namespace ATM_software
         }
     }
 
-  
+
 }

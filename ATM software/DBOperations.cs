@@ -5,51 +5,71 @@ namespace ATM_software
 {
     class DBOperations
     {
-        public void WriteTransactionsToFile(string transaction)
-        {
-        StreamWriter writer = new StreamWriter("Test.txt");
-            try
-            {
-                //Pass the filepath and filename to the StreamWriter Constructor
-                writer.WriteLine(transaction);
-
-                //Close the file
-                writer.Close();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Exception: " + e.Message);
-            }
-            finally
-            {
-                Console.WriteLine("Executing finally block.");
-            }
-        }
-
-        public void ReadTransactionsFromFile()
+        private string TransactionRecordPath = @"c:\temp\transaction-record.txt";
+        public string AccountBalancePath = @"c:\temp\Account-balance.txt";
+        public void WriteTransactionsToFile(string transaction, string TransactionType)
         {
             try
             {
-                // Create an instance of StreamReader to read from a file.
-                // The using statement also closes the StreamReader.
-                using (StreamReader sr = new StreamReader("Test.txt"))
+                RecordTransaction(transaction, TransactionType);
+                using (StreamWriter sw = new StreamWriter(AccountBalancePath))
                 {
-                    string line;
-                    // Read and display lines from the file until the end of
-                    // the file is reached.
-                    while ((line = sr.ReadLine()) != null)
+                    switch (TransactionType)
                     {
-                        Console.WriteLine(line);
+                        case "deposit":
+                            sw.WriteLine(transaction);
+
+                            break;
+                        case "withdraw":
+                            sw.WriteLine(transaction);
+
+                            break;
+                        default:
+                            throw new Exception("Invalid option");
                     }
+
                 }
+
             }
             catch (Exception e)
             {
-                // Let the user know what went wrong.
-                Console.WriteLine("The file could not be read:");
                 Console.WriteLine(e.Message);
             }
         }
-    
+
+        private void RecordTransaction(string transaction, string TransactionType)
+        {
+            try
+            {
+                File.AppendAllText(TransactionRecordPath, $"{TransactionType} - {transaction} {DateTime.Now + Environment.NewLine}");
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
+        public void ReadTransactions()
+        {
+            using (StreamReader reader = new StreamReader(TransactionRecordPath))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    Console.WriteLine(line);
+                }
+
+            }
+        }
+        public void ShowAcountBalance()
+        {
+            using (StreamReader reader = new StreamReader(AccountBalancePath))
+            {
+                string balance = reader.ReadLine();
+                Console.WriteLine($"Your account balance is - {balance}");
+
+            }
+        }
     }
 }
